@@ -25,12 +25,7 @@ app.get('/api/hello', function(req, res) {
 });
 
 function isURl(data) {
-  try {
-    new URL(data)
-    return true ;
-  } catch (e) {
-    return false ;
-  }
+  return /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/.test(data);
 }
 
 let tempData = [];
@@ -39,7 +34,7 @@ let tempDataID = 1 ;
 app.post("/api/shorturl", function(req, res) {
   console.log(req.body);
   let url = req.body.url
-  if(isURl(url.url)){
+  if(isURl(url)){
     let newURl = {original_url: url, short_url: tempDataID};
     tempDataID++;
     tempData.push(newURl);
