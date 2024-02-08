@@ -19,6 +19,37 @@ app.get('/api/hello', function(req, res) {
   res.json({ greeting: 'hello API' });
 });
 
+function isURl(data) {
+  try {
+    new URL(data)
+    return true ;
+  } catch (e) {
+    return false ;
+  }
+}
+
+const tempData = [];
+
+app.post("/api/shorturl", function(req, res) {
+  let url = req.body.url
+  if(isURl(url)){
+    let newURl = {original_url: url, short_url: crypto.randomUUID()}
+    tempData.push(newURl);
+    res.json(newURl)
+  }else {
+    res.json({error: "invalid url"})
+  }
+})
+
+app.get("/api/shorturl/:short", function(req, res) {
+  let originalUrl = tempData.filter((value) => value.short_url == req.params.short)
+  if(originalUrl){
+    res.redirect(originalUrl)
+  }else {
+    res.json({error: "invalid url"})
+  }
+})
+
 app.listen(port, function() {
   console.log(`Listening on port ${port}`);
 });
