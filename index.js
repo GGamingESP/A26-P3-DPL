@@ -29,7 +29,7 @@ function isURl(data) {
 }
 
 let tempData = [];
-let tempDataID = 1 ;
+let tempDataID = 0 ;
 
 app.post("/api/shorturl", function(req, res) {
   console.log(req.body);
@@ -45,7 +45,8 @@ app.post("/api/shorturl", function(req, res) {
 })
 
 app.get("/api/shorturl/:short", function(req, res) {
-  let originalUrl = tempData.filter((value) => value.short_url == req.params.short)
+  let pos = req.params.short
+  let originalUrl = tempData[pos]
   if(originalUrl){
     res.redirect(originalUrl.original_url)
   }else {
