@@ -31,8 +31,8 @@ function isURl(data) {
 const tempData = [];
 
 app.post("/api/shorturl", function(req, res) {
-  let url = req.body.url
   console.log(req.body);
+  let url = req.body.url
   if(isURl(url)){
     let newURl = {original_url: url, short_url: crypto.randomUUID()}
     tempData.push(newURl);
