@@ -28,13 +28,15 @@ function isURl(data) {
   }
 }
 
-const tempData = [];
+let tempData = [];
+let tempDataID = 1 ;
 
 app.post("/api/shorturl", function(req, res) {
   console.log(req.body);
-  let url = req.body.url
+  let url = req.body.original_url
   if(isURl(url)){
-    let newURl = {original_url: url, short_url: crypto.randomUUID()}
+    let newURl = {original_url: url, short_url: tempDataID};
+    tempDataID++;
     tempData.push(newURl);
     res.json(newURl)
   }else {
