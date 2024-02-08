@@ -47,7 +47,7 @@ app.post("/api/shorturl", function(req, res) {
 app.get("/api/shorturl/:short", function(req, res) {
   let originalUrl = tempData.filter((value) => value.short_url == req.params.short)
   if(originalUrl){
-    res.redirect(originalUrl)
+    res.redirect(originalUrl.original_url)
   }else {
     res.json({error: "invalid url"})
   }
