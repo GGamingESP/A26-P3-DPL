@@ -38,7 +38,7 @@ let tempDataID = 1 ;
 
 app.post("/api/shorturl", function(req, res) {
   console.log(req.body);
-  let url = req.body.original_url
+  let url = req.body.url
   if(isURl(url)){
     let newURl = {original_url: url, short_url: tempDataID};
     tempDataID++;
