@@ -7,8 +7,8 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(cors());
-
-app.use( bodyParser.json() );      
+var bodyParser = require('body-parser')
+app.use(bodyParser.json() );      
 app.use(bodyParser.urlencoded({     
   extended: true
 })); 
